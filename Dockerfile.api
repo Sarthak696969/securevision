@@ -1,0 +1,10 @@
+FROM python:3.11-slim
+WORKDIR /app
+RUN pip install --no-cache-dir poetry==1.8.3
+COPY pyproject.toml README.md /app/
+ENV PIP_DEFAULT_TIMEOUT=100
+RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
+COPY securevision /app/securevision
+COPY configs /app/configs
+ENV PYTHONUNBUFFERED=1
+CMD ["uvicorn","securevision.api.main:app","--host","0.0.0.0","--port","8000"]

@@ -1,0 +1,4 @@
+num_clients: 20
+malicious_frac: 0.3
+aggregator: fltrust
+rounds: 2
